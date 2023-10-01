@@ -1,0 +1,98 @@
+---
+"welcome": "Welcome to the Calculator application!"
+"languages": |-
+  Please select one of the following languages to proceed:
+  1) English (en)
+  2) Spanish (es)
+  3) German (de)
+"invalid_language": "Invalid language selection."
+en:
+  "instructions": "This calculator will request you input 2 numbers and 1 operand (+, -, * or /) and present the result to you"
+  "name": "What is your name?"
+  "valid_name": "Must input a valid name. Try again."
+  "welcome_name": "Welcome %{name}!"
+  "first_num": "What's the first number?"
+  "valid_num": "Please input a valid number."
+  "second_num": "What's the second number?"
+  "operations": |-
+    What operation would you like to perform?
+        1) add (+)
+        2) subtract (-)
+        3) multiply (*)
+        4) divide (/)
+  "valid_operator": |-
+    'Invalid response. Please select a valid operator: 
+      1) add (+)
+      2) subtract (-)
+      3) multiply (*)
+      4) divide (/)
+  "Adding": "Adding"
+  "Subtracting": "Subtracting"
+  "Multiplying": "Multiplying"
+  "Dividing": "Dividing"
+  "zero_division": "Error! %{name}! You can't divide by 0!"
+  "describe_result": "%{operator_verb} the two numbers: %{num1} %{operator_char} %{num2} = %{result}"
+  "continue_input": "Input Y to perform another operation or N to exit."
+  "continue_invalid": "Invalid input. Please input either Y or N."
+  "next": "Starting the next calculation..."
+  "thanks": Thanks for using the calculator %{name}. Good bye!
+es:
+  "instructions": "Esta calculadora le pedirá que ingrese 2 números y 1 operando (+, -, * o /) y le presentará el resultado"
+  "name": "¿Cómo te llamas?"
+  "valid_name": "Debe ingresar un nombre válido. Intentar otra vez."
+  "welcome_name": "Bienvenido %{name}!"
+  "first_num": "¿Cuál es el primer número?"
+  "valid_num": "Por favor ingrese un número válido."
+  "second_num": "¿Cuál es el segundo número?"
+  "operations": |-
+    ¿Qué operación te gustaría realizar?
+        1) agregar (+)
+        2) restar (-)
+        3) multiplicar (*)
+        4) dividir (/)
+  "valid_operator": |-
+    Respuesta invalida. Seleccione un operador válido: 
+      1) agregar (+)
+      2) restar (-)
+      3) multiplicar (*)
+      4) dividir (/)
+  "Adding": "Añadiendo"
+  "Subtracting": "Restando"
+  "Multiplying": "Multiplicando"
+  "Dividing": "Divisor"
+  "zero_division": "Error! %{name}! No puedes dividir por 0!"
+  "describe_result": "%{operator_verb} los dos numeros: %{num1} %{operator_char} %{num2} = %{result}"
+  "continue_input": "Introduzca Y para realizar otra operación o N para salir."
+  "continue_invalid": "Entrada inválida. Por favor ingrese Y o N."
+  "next": "Comenzando el siguiente cálculo..."
+  "thanks": "Gracias por usar la calculadora, %{name}. ¡Adiós!"
+de: 
+  "instructions": "Dieser Rechner fordert Sie zur Eingabe von 2 Zahlen und 1 Operanden (+, -, * oder /) auf und präsentiert Ihnen das Ergebnis"
+  "name": "Wie heißt du?"
+  "valid_name": "Es muss ein gültiger Name eingegeben werden. Versuchen Sie es erneut."
+  "welcome_name": "Willkommen %{name}!"
+  "first_num": "Wie lautet die erste Zahl?"
+  "valid_num": "Bitte geben Sie eine gültige Nummer ein."
+  "second_num": "Wie lautet die zweite Zahl?"
+  "operations": |-
+    Welche operation möchten Sie durchführen?
+        1) hinzufügen (+)
+        2) subtrahieren (-)
+        3) multiplizieren (*)
+        4) teilen (/)
+  "valid_operator": |-
+    'Ungültige Antwort. Bitte wählen Sie einen gültigen Betreiber aus: 
+      1) hinzufügen (+)
+      2) subtrahieren (-)
+      3) multiplizieren (*)
+      4) teilen (/)
+  "Adding": "Hinzufügen"
+  "Subtracting": "Subtrahieren"
+  "Multiplying": "Multiplizieren"
+  "Dividing": "Teilen"
+  "zero_division": "Fehler! %{name}! Du kannst nicht durch 0 dividieren!"
+  "describe_result": "%{operator_verb} die beiden Zahlen: %{num1} %{operator_char} %{num2} = %{result}"
+  "continue_input": "Geben Sie Y ein, um einen weiteren Vorgang auszuführen, oder N, um den Vorgang zu beenden."
+  "continue_invalid": "Ungültige Eingabe. Bitte geben Sie entweder Y oder N ein."
+  "next": "Beginn der nächsten Berechnung..."
+  "thanks": Vielen Dank, dass Sie den Rechner verwenden %{name}. Auf Wiedersehen!

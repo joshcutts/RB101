@@ -1,0 +1,3 @@
+# even.rb
+
+1.upto(99) {|num| puts num if num.even?}
