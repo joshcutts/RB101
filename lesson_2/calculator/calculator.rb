@@ -37,29 +37,29 @@ def get_language(messages)
   language
 end
 
-LANGUAGE_CONVERSION_HASH = {
-  "1" => "en",
-  "english" => "en",
-  "en" => "en",
-  "2" => "es",
-  "spanish" => "es",
-  "español" => "es",
-  "es" => "es",
-  "3" => "de",
-  "German" => "de",
-  "deutsch" => "de",
-  "de" => "de"
-}
-
 def convert_raw_lang_input(input)
-  LANGUAGE_CONVERSION_HASH[input]
+  language_conversion_hash = {
+    "1" => "en",
+    "english" => "en",
+    "en" => "en",
+    "2" => "es",
+    "spanish" => "es",
+    "español" => "es",
+    "es" => "es",
+    "3" => "de",
+    "German" => "de",
+    "deutsch" => "de",
+    "de" => "de"
+  }
+
+  language_conversion_hash[input]
 end
 
-def get_name(messages, lang)
+def get_name(translation)
   name = gets.chomp
   loop do
     if name.strip.empty?
-      prompt(messages[lang]["valid_name"])
+      prompt(translation["valid_name"])
     else
       break
     end
@@ -67,57 +67,65 @@ def get_name(messages, lang)
   name
 end
 
-def get_input_num(messages, lang)
+def get_input_num(translation)
   num = ""
   loop do
     num = gets.chomp
     break if valid_number?(num)
-    prompt(messages[lang]["valid_num"])
+    prompt(translation["valid_num"])
   end
   num
 end
 
-def get_operator_input(messages, lang)
+def get_operator_input(translation)
   operator = ''
+
+  valid_add = translation["valid_add"]
+  valid_subtract = translation["valid_subtract"]
+  valid_mult = translation["valid_mult"]
+  valid_div = translation["valid_div"]
+
+  valid_op = valid_add + valid_subtract + valid_mult + valid_div
   loop do
     operator = gets.chomp.downcase
-    break if %w(1 add addition agregar hinzufügen +
-                2 subtract subtraction restar subtrahieren -
-                3 multiply multiplication multiplicar multiplizieren *
-                4 divide division dividir teilen /).include?(operator)
-    prompt(messages[lang]["valid_operator"])
+    break if valid_op.include?(operator)
+    prompt(translation["valid_operator"])
   end
   operator
 end
 
-OPERATOR_INPUT_TO_NUM = {
-  "1" => ["1", "add", "addition", "+", "agregar", "hinzufügen"],
-  "2" => ["2", "subtract", "subtraction", "-", "restar", "subtrahieren"],
-  "3" => ["3", "multiply", "multiplication",
-          "*", "multiplicar", "multiplizieren"],
-  "4" => ["4", "divide", "division", "/", "dividir", "teilen"]
-}
+def convert_raw_operator_input(input, translation)
+  operator_input_to_num = {
+    "1" => translation["valid_add"],
+    "2" => translation["valid_subtract"],
+    "3" => translation["valid_mult"],
+    "4" => translation["valid_div"]
+  }
 
-def convert_raw_operator_input(input)
-  operator_hash = OPERATOR_INPUT_TO_NUM.select do |_key, value|
+  operator_hash = operator_input_to_num.select do |_key, value|
     value.include?(input)
   end
   operator_hash.keys[0]
 end
 
-def convert_operator_to_verb(operator, messages, language)
+def get_operator(translation)
+  raw_operator = get_operator_input(translation)
+  convert_raw_operator_input(raw_operator, translation)
+end
+
+def convert_operator_to_verb(operator, translation)
   operator_to_verb = {
-    "1" => messages[language]["Adding"],
-    "2" => messages[language]["Subtracting"],
-    "3" => messages[language]["Multiplying"],
-    "4" => messages[language]["Dividing"]
+    "1" => translation["Adding"],
+    "2" => translation["Subtracting"],
+    "3" => translation["Multiplying"],
+    "4" => translation["Dividing"]
   }
   operator_to_verb[operator]
 end
 
-def division(operand1, operand2, messages, lang, name)
-  if operand2.to_i == 0
-    prompt(format(messages[lang]["zero_division"], name: name))
+def division(operand1, operand2, translation, name, operand)
+  if operand2.to_i == 0 && operand == "/"
+    prompt(format(translation["zero_division"], name: name))
   else
     operand1.to_f / operand2.to_f
   end
@@ -136,36 +144,47 @@ def calculate_result(operator, operand1, operand2, division_result)
   end
 end
 
-OPERATOR_NUM_TO_CHARACTER = {
-  "1" => "+",
-  "2" => "-",
-  "3" => "*",
-  "4" => "/"
-}
-
 def convert_operator_num_to_char(operator)
-  OPERATOR_NUM_TO_CHARACTER[operator]
+  operator_num_to_character = {
+    "1" => "+",
+    "2" => "-",
+    "3" => "*",
+    "4" => "/"
+  }
+
+  operator_num_to_character[operator]
 end
 
-def display_result(message, verb, operator_character, num1, num2, result)
-  if num2.to_i == 0
+def create_res_str_words(message, verb)
+  format(message, operator_verb: verb)
+end
+
+def create_res_str_nums(message, num1, num2, operator_char, result)
+  format(message,
+         num1: num1,
+         operator_char: operator_char,
+         num2: num2,
+         result: result)
+end
+
+def generate_final_result_string(words, nums)
+  prompt(words + nums)
+end
+
+def display_result(num2, operator_character, result_string)
+  if num2.to_i == 0 && operator_character == "/"
     result
   else
-    prompt(format(message,
-                  operator_verb: verb,
-                  num1: num1,
-                  operator_char: operator_character,
-                  num2: num2,
-                  result: result))
+    result_string
   end
 end
 
-def get_next_input(messages, lang)
+def get_next_input(translation)
   continue = ''
   loop do
     continue = gets.chomp.downcase
     break if continue == "y" || continue == "n"
-    prompt(messages[lang]["continue_invalid"])
+    prompt(translation["continue_invalid"])
   end
   continue
 end
@@ -179,39 +198,46 @@ prompt(MESSAGES["languages"])
 raw_lang = get_language(MESSAGES)
 lang = convert_raw_lang_input(raw_lang)
 
-prompt(MESSAGES[lang]["instructions"])
-prompt(MESSAGES[lang]["name"])
+translated_message = MESSAGES[lang]
 
-name = get_name(MESSAGES, lang)
+prompt(translated_message["instructions"])
+prompt(translated_message["name"])
 
-prompt(format(MESSAGES[lang]["welcome_name"], name: name))
+name = get_name(translated_message)
+
+prompt(format(translated_message["welcome_name"], name: name))
 
 loop do
-  prompt(MESSAGES[lang]["first_num"])
-  num1 = get_input_num(MESSAGES, lang)
-  prompt(MESSAGES[lang]["second_num"])
-  num2 = get_input_num(MESSAGES, lang)
+  prompt(translated_message["first_num"])
+  num1 = get_input_num(translated_message)
+  prompt(translated_message["second_num"])
+  num2 = get_input_num(translated_message)
 
-  prompt(MESSAGES[lang]["operations"])
+  prompt(translated_message["operations"])
 
-  raw_operator = get_operator_input(MESSAGES, lang)
-  operator = convert_raw_operator_input(raw_operator)
+  operator = get_operator(translated_message)
 
-  desc_res_msg = MESSAGES[lang]["describe_result"]
-  operator_verb = convert_operator_to_verb(operator, MESSAGES, lang)
+  operator_verb = convert_operator_to_verb(operator, translated_message)
   operator_char = convert_operator_num_to_char(operator)
 
-  division_result = division(num1, num2, MESSAGES, lang, name)
-  result = calculate_result(operator, num1, num2, division_result)
+  div_result = division(num1, num2, translated_message, name, operator_char)
+  result = calculate_result(operator, num1, num2, div_result)
 
-  display_result(desc_res_msg, operator_verb, operator_char, num1, num2, result)
+  result_msg_words = translated_message["describe_result_words"]
+  words = create_res_str_words(result_msg_words, operator_verb)
 
-  prompt(MESSAGES[lang]["continue_input"])
-  continue = get_next_input(MESSAGES, lang)
+  result_msg_nums = translated_message["describe_result_nums"]
+  nums = create_res_str_nums(result_msg_nums, num1, num2, operator_char, result)
+
+  final_string = generate_final_result_string(words, nums)
+  display_result(num2, operator_char, final_string)
+
+  prompt(translated_message["continue_input"])
+  continue = get_next_input(translated_message)
   break unless continue == "y"
 
   # clear terminal output before starting next calculation if continuing
   puts "\e[H\e[2J"
-  prompt(MESSAGES[lang]["next"])
+  prompt(translated_message["next"])
 end
-prompt(format(MESSAGES[lang]["thanks"], name: name))
+prompt(format(translated_message["thanks"], name: name))

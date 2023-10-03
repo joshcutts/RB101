@@ -26,12 +26,17 @@ en:
       2) subtract (-)
       3) multiply (*)
       4) divide (/)
+  "valid_add": ["1", "add", "addition", "+"]
+  "valid_subtract": ["2", "subtract", "subtraction", "-"]
+  "valid_mult": ["3", "multiply", "multiplication", "*"]
+  "valid_div": ["4", "divide", "division", "/"]
   "Adding": "Adding"
   "Subtracting": "Subtracting"
   "Multiplying": "Multiplying"
   "Dividing": "Dividing"
   "zero_division": "Error! %{name}! You can't divide by 0!"
-  "describe_result": "%{operator_verb} the two numbers: %{num1} %{operator_char} %{num2} = %{result}"
+  "describe_result_words": "%{operator_verb} the two numbers: "
+  "describe_result_nums": "%{num1} %{operator_char} %{num2} = %{result}"
   "continue_input": "Input Y to perform another operation or N to exit."
   "continue_invalid": "Invalid input. Please input either Y or N."
   "next": "Starting the next calculation..."
@@ -47,21 +52,26 @@ es:
   "operations": |-
     ¿Qué operación te gustaría realizar?
         1) agregar (+)
-        2) restar (-)
+        2) sustraer (-)
         3) multiplicar (*)
         4) dividir (/)
   "valid_operator": |-
     Respuesta invalida. Seleccione un operador válido: 
       1) agregar (+)
-      2) restar (-)
+      2) sustraer (-)
       3) multiplicar (*)
       4) dividir (/)
+  "valid_add": ["1", "agregar", "suma", "+"]
+  "valid_subtract": ["2", "sustraer", "sustracción", "-"]
+  "valid_mult": ["3", "multiplicar", "multiplication", "*"]
+  "valid_div": ["4", "dividir", "división", "/"]
   "Adding": "Añadiendo"
   "Subtracting": "Restando"
   "Multiplying": "Multiplicando"
   "Dividing": "Divisor"
   "zero_division": "Error! %{name}! No puedes dividir por 0!"
-  "describe_result": "%{operator_verb} los dos numeros: %{num1} %{operator_char} %{num2} = %{result}"
+  "describe_result_words": "%{operator_verb} tos dos numeros: "
+  "describe_result_nums": "%{num1} %{operator_char} %{num2} = %{result}"
   "continue_input": "Introduzca Y para realizar otra operación o N para salir."
   "continue_invalid": "Entrada inválida. Por favor ingrese Y o N."
   "next": "Comenzando el siguiente cálculo..."
@@ -86,12 +96,17 @@ de:
       2) subtrahieren (-)
       3) multiplizieren (*)
       4) teilen (/)
+  "valid_add": ["1", "hinzufügen", "Zusatz", "+"]
+  "valid_subtract": ["2", "subtrahieren", "subtraktion", "-"]
+  "valid_mult": ["3", "multiplizieren", "multiplikation", "*"]
+  "valid_div": ["4", "teilen", "Aufteilung", "/"]
   "Adding": "Hinzufügen"
   "Subtracting": "Subtrahieren"
   "Multiplying": "Multiplizieren"
   "Dividing": "Teilen"
   "zero_division": "Fehler! %{name}! Du kannst nicht durch 0 dividieren!"
-  "describe_result": "%{operator_verb} die beiden Zahlen: %{num1} %{operator_char} %{num2} = %{result}"
+  "describe_result": "%{operator_verb} die beiden Zahlen: "
+  "describe_result_nums": "%{num1} %{operator_char} %{num2} = %{result}"
   "continue_input": "Geben Sie Y ein, um einen weiteren Vorgang auszuführen, oder N, um den Vorgang zu beenden."
   "continue_invalid": "Ungültige Eingabe. Bitte geben Sie entweder Y oder N ein."
   "next": "Beginn der nächsten Berechnung..."

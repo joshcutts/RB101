@@ -1,20 +1,10 @@
 # testing.rb
 
 
-def name
-  "George"
-end
+a = [1,2,3,4]
+b = [5,6,7,8]
+c = [9, 10, 11, 12]
 
-name = "Lisa"
+d = a + b + c
 
-def display_name(name)
-  puts name
-end
-
-display_name(name)
-
- ______________________
-|   YOU    |  COMPUTER |
-|          |           |
-|__________|___________|
-
+p d
