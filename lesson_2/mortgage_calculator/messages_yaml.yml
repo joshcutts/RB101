@@ -1,0 +1,80 @@
+---
+"welcome": "Welcome to Mortgage Calculator!"
+"languages": |-
+  Please select one of the following languages to proceed:
+  1) English (en)
+  2) Spanish (es)
+  3) German (de)
+"invalid_language": "Invalid language selection."
+en:
+  "instructions1": "This calculator will request your loan amount, APR and loan duration,"
+  "instructions2": "Then it will calculate your monthly payment for you!"
+  "loan_prompt": "What is the loan amount in %{currency_word}? For example a valid loan amount such as $500,000."
+  "currency_word": "dollars"
+  "currency": "$"
+  "valid_dollars": "Must enter a valid amount in %{currency_word}."
+  "interest_prompt": "What is the Annual Percentage Rate (APR)? For example 5.99%"
+  "invalid_interest": "Input a valid percentage between 0.01% and 100%"
+  "duration_prompt": "What is the loan duration in years?"
+  "invalid_years": "Invalid years input. Input valid loan duration in years."
+  "negative_duration": "Loan duration can't be less than or equal to 0. Input valid loan duration in years."
+  "invalid_long_loan": "Loan duration >30 is unusual and invalid. Input valid loan duration in years."
+  "parameters": |-
+    For the following parameters:
+    Loan Amount:             %{currency}%{loan}
+    APR:                     %{interest}%
+    Loan Duration:           %{years} years
+  "monthly_payment": "Your monthly payment is %{currency}%{payment}"
+  "invalid_input": "Invalid input. Please input Y or N."
+  "lifetime_prompt": "Do you want to know how much interest you will pay over the lifetime of the loan? (Y/N)"
+  "lifetime_statement": "Over the lifetime of the loan you will pay %{currency}%{life_interest} in interest."
+  "another_loan": "Do you want to calculate a monthly payment with different parameters? (Y/N)"
+  "goodbye": "Thanks for using this Mortgage Calculator! Come back again!"
+es:
+  "instructions1": "Esta calculadora le solicitará el monto de su préstamo, la APR y la duración del préstamo."
+  "instructions2": "¡Entonces calculará su pago mensual por usted!"
+  "loan_prompt": "¿Cuál es el monto del préstamo en %{currency_word}?"
+  "currency_word": "euros"
+  "currency": "€"
+  "valid_dollars": "Debe ingresar una cantidad válida en. %{currency_word}."
+  "interest_prompt": "¿Qué es la Annual Percentage Rate (APR)?"
+  "invalid_interest": "Introduzca un porcentaje válido entre 0.01% y 100%"
+  "duration_prompt": "¿Cuál es la duración del préstamo en años?"
+  "invalid_years": "Entrada de años no válida. Ingrese la duración válida del préstamo en años."
+  "negative_duration": "La duración del préstamo no puede ser negativa. Ingrese la duración válida del préstamo en años."
+  "invalid_long_loan": "La duración del préstamo >30 es inusual e inválida. Ingrese la duración válida del préstamo en años."
+  "parameters": |-
+    Para los siguientes parámetros:
+    Monto del préstamo:      %{currency}%{loan}
+    APR:                     %{interest}%
+    Duración del préstamo:   %{years} years
+  "monthly_payment": "Su pago mensual es %{currency}%{payment}"
+  "invalid_input": "Entrada inválida. Por favor ingrese Y o N."
+  "lifetime_prompt": "¿Quiere saber cuánto interés pagará durante la vigencia del préstamo? (Y/N)"
+  "lifetime_statement": "Durante la vida del préstamo usted pagará %{currency}%{life_interest} en interés."
+  "another_loan": "¿Quieres calcular un pago mensual con diferentes parámetros? (Y/N)"
+  "goodbye": "¡Gracias por utilizar esta calculadora de hipotecas! ¡Volver de nuevo!"
+de: 
+  "instructions1": "Dieser Rechner fragt Ihren Kreditbetrag, den effektiven Jahreszins und die Kreditlaufzeit ab."
+  "instructions2": "Dann berechnet es Ihre monatliche Zahlung für Sie!"
+  "loan_prompt": "Wie hoch ist der Kreditbetrag in %{currency_word}?"
+  "currency_word": "euros"
+  "currency": "€"
+  "valid_dollars": "Sie müssen einen gültigen Betrag eingeben %{currency_word}."
+  "interest_prompt": "Was ist der Annual Percentage Rate (APR)?"
+  "invalid_interest": "Geben Sie einen gültigen Prozentsatz zwischen 0.01% und 100% ein."
+  "duration_prompt": "Wie lang ist die Kreditlaufzeit in Jahren?"
+  "invalid_years": "Ungültige Jahreseingabe. Geben Sie die gültige Kreditlaufzeit in Jahren ein."
+  "negative_duration": "Die Kreditlaufzeit darf nicht negativ sein. Geben Sie die gültige Kreditlaufzeit in Jahren ein."
+  "invalid_long_loan": "Eine Kreditlaufzeit >30 ist ungewöhnlich und ungültig. Geben Sie die gültige Kreditlaufzeit in Jahren ein."
+  "parameters": |-
+    Für die folgenden Parameter:
+    Darlehensbetrag:         %{currency}%{loan}
+    APR:                     %{interest}%
+    Darlehensdauer:          %{years} years
+  "monthly_payment": "Ihre monatliche zahlung beträgt %{currency}%{payment}"
+  "invalid_input": "Ungültige Eingabe. Bitte geben Sie Y oder N ein."
+  "lifetime_prompt": "Möchten Sie wissen, wie viel zinsen sie über die Laufzeit des Darlehens zahlen werden? (Y/N)"
+  "lifetime_statement": "Sie zahlen über die gesamte Laufzeit des Darlehens %{currency}%{life_interest} im interesse."
+  "another_loan": "Möchten Sie eine monatliche zahlung mit unterschiedlichen parametern berechnen? (Y/N)"
+  "goodbye": "Vielen Dank, dass Sie diesen Hypothekenrechner verwenden! Komm wieder zurück!"
