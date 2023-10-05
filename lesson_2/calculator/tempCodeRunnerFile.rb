@@ -1,1 +1,2 @@
-describe_result_str
+  # else
+  #   result_string

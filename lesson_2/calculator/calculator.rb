@@ -168,14 +168,14 @@ def create_res_str_nums(message, num1, num2, operator_char, result)
 end
 
 def generate_final_result_string(words, nums)
-  prompt(words + nums)
+  words + nums
 end
 
 def display_result(result, result_string, translation, name)
-  if result.class == Symbol
-    prompt translation["zero_division", name: name]
+  if result == :divide_by_zero
+    return prompt(format(translation["zero_division"], name: name))
   else
-    result_string
+   prompt(result_string)
   end
 end
 
@@ -228,7 +228,7 @@ loop do
   nums = create_res_str_nums(result_msg_nums, num1, num2, operator_char, result)
 
   final_string = generate_final_result_string(words, nums)
-  display_result(num2, operator_char, final_string, name)
+  display_result(result, final_string, translated_message, name)
 
   prompt(translated_message["continue_input"])
   continue = get_next_input(translated_message)
