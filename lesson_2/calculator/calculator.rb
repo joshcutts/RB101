@@ -34,7 +34,7 @@ def get_language(messages)
     prompt(messages["invalid_language"])
     prompt(messages["languages"])
   end
-  language
+  convert_raw_lang_input(language)
 end
 
 def convert_raw_lang_input(input)
@@ -123,15 +123,15 @@ def convert_operator_to_verb(operator, translation)
   operator_to_verb[operator]
 end
 
-def division(operand1, operand2, translation, name, operand)
-  if operand2.to_i == 0 && operand == "/"
-    prompt(format(translation["zero_division"], name: name))
+def division(operand1, operand2)
+  if operand2.to_i == 0
+    :divide_by_zero
   else
     operand1.to_f / operand2.to_f
   end
 end
 
-def calculate_result(operator, operand1, operand2, division_result)
+def calculate_result(operator, operand1, operand2)
   case operator
   when '1'
     operand1.to_f + operand2.to_f
@@ -140,7 +140,7 @@ def calculate_result(operator, operand1, operand2, division_result)
   when '3'
     operand1.to_f * operand2.to_f
   when '4'
-    division_result
+    division(operand1, operand2)
   end
 end
 
@@ -171,9 +171,9 @@ def generate_final_result_string(words, nums)
   prompt(words + nums)
 end
 
-def display_result(num2, operator_character, result_string)
-  if num2.to_i == 0 && operator_character == "/"
-    result
+def display_result(result, result_string, translation, name)
+  if result.class == Symbol
+    prompt translation["zero_division", name: name]
   else
     result_string
   end
@@ -195,8 +195,7 @@ puts "\e[H\e[2J"
 prompt(MESSAGES["welcome"])
 prompt(MESSAGES["languages"])
 
-raw_lang = get_language(MESSAGES)
-lang = convert_raw_lang_input(raw_lang)
+lang = get_language(MESSAGES)
 
 translated_message = MESSAGES[lang]
 
@@ -220,8 +219,7 @@ loop do
   operator_verb = convert_operator_to_verb(operator, translated_message)
   operator_char = convert_operator_num_to_char(operator)
 
-  div_result = division(num1, num2, translated_message, name, operator_char)
-  result = calculate_result(operator, num1, num2, div_result)
+  result = calculate_result(operator, num1, num2)
 
   result_msg_words = translated_message["describe_result_words"]
   words = create_res_str_words(result_msg_words, operator_verb)
@@ -230,7 +228,7 @@ loop do
   nums = create_res_str_nums(result_msg_nums, num1, num2, operator_char, result)
 
   final_string = generate_final_result_string(words, nums)
-  display_result(num2, operator_char, final_string)
+  display_result(num2, operator_char, final_string, name)
 
   prompt(translated_message["continue_input"])
   continue = get_next_input(translated_message)
