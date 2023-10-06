@@ -47,7 +47,7 @@ es:
     Para los siguientes parámetros:
     Monto del préstamo:      %{currency}%{loan}
     APR:                     %{interest}%
-    Duración del préstamo:   %{years} years
+    Duración del préstamo:   %{years} años
   "monthly_payment": "Su pago mensual es %{currency}%{payment}"
   "invalid_input": "Entrada inválida. Por favor ingrese Y o N."
   "lifetime_prompt": "¿Quiere saber cuánto interés pagará durante la vigencia del préstamo? (Y/N)"
@@ -71,7 +71,7 @@ de:
     Für die folgenden Parameter:
     Darlehensbetrag:         %{currency}%{loan}
     APR:                     %{interest}%
-    Darlehensdauer:          %{years} years
+    Darlehensdauer:          %{years} jahre
   "monthly_payment": "Ihre monatliche zahlung beträgt %{currency}%{payment}"
   "invalid_input": "Ungültige Eingabe. Bitte geben Sie Y oder N ein."
   "lifetime_prompt": "Möchten Sie wissen, wie viel zinsen sie über die Laufzeit des Darlehens zahlen werden? (Y/N)"
