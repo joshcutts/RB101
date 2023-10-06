@@ -138,6 +138,7 @@ def calculate_monthly_payment(loan, interest_rate, duration_years)
 end
 
 # function to format numbers so there are "," in appropriate location
+# if the number is 1000 or greater
 def format_number(number)
   whole, decimal = number.to_s.split(".")
   num_groups = whole.chars.to_a.reverse.each_slice(3)
@@ -163,7 +164,7 @@ def display_monthly_payment(monthly_payment, messages)
 end
 
 def calculate_lifetime_interest(monthly_payment, duration_years, loan_amount)
-  duration_months = duration_years.to_i * 12
+  duration_months = duration_years.to_i * MONTHS_IN_YEAR
   (monthly_payment * duration_months) - loan_amount.to_f
 end
 
@@ -171,8 +172,8 @@ def get_yes_no_input(messages)
   continue = ''
   loop do
     continue = gets.chomp.downcase
-    break if continue == "y" || continue == "n"
-    prompt([messages["invalid_input"]])
+    break if continue.start_with?("y") || continue.start_with?("n")
+    prompt(messages["invalid_input"])
   end
   continue
 end
@@ -180,7 +181,7 @@ end
 def display_lifetime_interest(lifetime_interest, messages)
   display = get_yes_no_input(messages)
   format_life_interest = format_number(format('%.2f', lifetime_interest))
-  if display == "y"
+  if display.start_with?("y")
     prompt(format(messages["lifetime_statement"],
                   currency: messages["currency"],
                   life_interest: format_life_interest))
@@ -215,7 +216,7 @@ loop do
 
   prompt(translation["another_loan"])
   continue = get_yes_no_input(translation)
-  break unless continue.downcase == "y"
+  break unless continue.downcase.start_with?("y")
   system("clear")
 end
 prompt(translation["goodbye"])
