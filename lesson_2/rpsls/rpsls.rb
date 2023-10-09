@@ -8,6 +8,21 @@ MESSAGES = YAML.safe_load(File.read("messages_yaml.yml"))
 VALID_CHOICES = %w[rock paper scissors lizard spock]
 VALID_CHOICES_ABREV = %w[r p sc l sp]
 
+def display_rules(messages)
+  loop do
+    prompt(messages["rules_prompt"])
+    response = gets.chomp.downcase
+    if response == "y"
+      puts(messages["rules"])
+      sleep(4)
+      break
+    elsif response == "n"
+      break
+    end
+    prompt(message["invalid_input"]) unless response == "n"
+  end
+end
+
 def get_choice(messages)
   all_choices = VALID_CHOICES + VALID_CHOICES_ABREV
   raw_choice = ''
@@ -96,10 +111,10 @@ def rock_paper_scissors_art(messages)
   puts ""
 end
 
-def display_intro(messages)
-  puts "+ #{'-' * 62} +"
+def display_grandwinner_rules(messages)
+  puts "+#{'-' * 62}+"
   puts "| #{messages['grand_winner_intro']} |"
-  puts "+ #{'-' * 62} +"
+  puts "+#{'-' * 62}+"
   sleep(0.5)
   puts "."
   sleep(0.5)
@@ -109,31 +124,18 @@ def display_intro(messages)
   sleep(0.5)
 end
 
-def display_scoreboard(count, player_wins, computer_wins)
-  puts "+#{'-' * 51}+"
-  puts "|" + "Starting game #{count}".center(51) + '|'
-  puts "|#{'-' * 51}|"
-  puts "|" + "You".center(25) + "|" + 'Computer'.center(25) + '|'
-  puts "|#{'-' * 51}|"
-  puts '|' + player_wins.to_s.center(25) + '|' + computer_wins.to_s.center(25) + '|'
-  puts "|#{' ' * 25}|#{' ' * 25}|"
-  puts "+#{'-' * 51}+"
-end
+def display_scoreboard(count, player_w, computer_w)
+  top_bottom = "+#{'-' * 51}+"
+  separation = "|#{'-' * 51}|"
 
-def display_rules(messages)
-  loop do
-    prompt(messages["rules_prompt"])
-    response = gets.chomp.downcase
-    if response == "y"
-      puts(messages["rules"])
-      sleep(4)
-      break
-    elsif response == "n"
-      sleep(1)
-      break
-    end
-    prompt(message["invalid_input"]) unless response == "n"
-  end
+  puts top_bottom
+  puts "|#{' ' * 18}Starting game #{count}#{' ' * 18}|"
+  puts separation
+  puts "|#{' ' * 11}You#{' ' * 11}|#{' ' * 8}Computer#{' ' * 9}|"
+  puts separation
+  puts "|#{' ' * 12}#{player_w}#{' ' * 12}|#{' ' * 12}#{computer_w}#{' ' * 12}|"
+  puts "|#{' ' * 25}|#{' ' * 25}|"
+  puts top_bottom
 end
 
 def count_wins(player, computer, player_score, computer_score)
@@ -170,7 +172,7 @@ rock_paper_scissors_art(MESSAGES)
 display_rules(MESSAGES)
 
 loop do
-  display_intro(MESSAGES)
+  display_grandwinner_rules(MESSAGES)
   game_counter = 1
   player_wins = 0
   computer_wins = 0
