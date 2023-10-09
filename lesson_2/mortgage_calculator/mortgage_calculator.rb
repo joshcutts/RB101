@@ -5,6 +5,7 @@ Dir.chdir("./lesson_2/mortgage_calculator")
 require "yaml"
 MESSAGES = YAML.safe_load(File.read("messages_yaml.yml"))
 MONTHS_IN_YEAR = 12
+LANGUAGE_CONVERSION_HASH = MESSAGES["lang_conversion"]
 
 def prompt(message)
   puts "=> #{message}"
@@ -14,9 +15,7 @@ def get_language(messages)
   language = ""
   loop do
     language = gets.chomp.downcase
-    break if %w(1 english en
-                2 spanish español es
-                3 german deutsch de).include?(language)
+    break if LANGUAGE_CONVERSION_HASH.keys.include?(language)
     prompt(messages["invalid_language"])
     prompt(messages["languages"])
   end
@@ -24,51 +23,27 @@ def get_language(messages)
 end
 
 def convert_raw_lang_input(input)
-  language_conversion_hash = {
-    "1" => "en",
-    "english" => "en",
-    "en" => "en",
-    "2" => "es",
-    "spanish" => "es",
-    "español" => "es",
-    "es" => "es",
-    "3" => "de",
-    "German" => "de",
-    "deutsch" => "de",
-    "de" => "de"
-  }
-
-  language_conversion_hash[input]
+  LANGUAGE_CONVERSION_HASH[input]
 end
 
-# method to determine if a number from gets (string) is a valid integer
 def valid_int?(num)
   num.to_i.to_s == num
 end
 
-# method to determine if a number from gets (string) is a valid float
-# should accomodate floats that end in 1 or 2 "0"s
 def valid_float?(num)
   (num.to_f.to_s == num.chomp('0')) || (num.to_f.to_s == num.chomp('.00'))
 end
 
-# combining the valid_integer? and valid_float methods to test for valid num
 def valid_number?(num)
   valid_int?(num) || valid_float?(num)
 end
 
-# defining function to test for valid loan amount. It tests for 3 things
-# 1) should be a valid number (can be integer or float)
-# 2) should be greater than 0
-# 3) can have up to 2 decimal points (within valid_float method)
-# needed the regex in the valid_float? method or that method would fail if num
-# ended in "0"
 def valid_loan_amount?(loan_amount)
-  condition1 = valid_number?(loan_amount)
-  condition2 = loan_amount.to_i > 0
-  condition3 = loan_amount =~ /^\d+(\.\d{0,2})?$/
+  valid_num = valid_number?(loan_amount)
+  positive = loan_amount.to_i > 0
+  two_decimals = loan_amount =~ /^\d+(\.\d{0,2})?$/
 
-  condition1 && condition2 && condition3
+  valid_num && positive && two_decimals
 end
 
 def get_loan_amount(messages)
@@ -85,10 +60,6 @@ def get_loan_amount(messages)
   loan_amount
 end
 
-# defining function to test for valid percentage for apr. It tests for 3 things
-# 1) should be a valid number (can be integer or float)
-# 2) should be greater than 0 but less than or equal to 100
-# 3) can have up to 2 decimal points or whole number (regex)
 def valid_apr?(percent)
   condition1 = valid_number?(percent)
   condition2 = percent.to_f.between?(0.01, 100)
@@ -108,37 +79,86 @@ def get_apr(messages)
   apr
 end
 
-def valid_duration?(duration_years, messages)
-  if valid_int?(duration_years) != true
-    prompt(messages["invalid_years"])
-  elsif duration_years.to_i <= 0
-    prompt(messages["negative_duration"])
-  elsif duration_years.to_i > 30
-    prompt(messages["invalid_long_loan"])
+def valid_duration_months?(duration_months, messages)
+  if valid_int?(duration_months) != true
+    prompt(messages["invalid_months"])
+  elsif duration_months.to_i <= 0
+    prompt(messages["negative_duration_months"])
+  elsif duration_months.to_i > (30 * MONTHS_IN_YEAR)
+    return unusual_loan_duration(messages)
   else
     return true
   end
   false
 end
 
-def get_loan_duration(messages)
+def unusual_loan_duration(messages)
+  prompt(messages["duration_confirm"])
+  continue = get_yes_no_input(messages)
+  return true if continue.start_with?("y")
+  false
+end
+
+def valid_duration_years?(duration_years, messages)
+  if valid_int?(duration_years) != true
+    prompt(messages["invalid_years"])
+  elsif duration_years.to_i <= 0
+    prompt(messages["negative_duration_years"])
+  elsif duration_years.to_i > 30
+    return unusual_loan_duration(messages)
+  else
+    return true
+  end
+  false
+end
+
+def months_or_years(messages)
+  prompt(messages["months_or_years"])
+  units = ""
+  loop do
+    units = gets.chomp.downcase
+    break if units.start_with?("m") || units.start_with?("y")
+    prompt(messages["invalid_months_or_years"])
+  end
+  units
+end
+
+def get_months(messages)
+  duration_months = ''
+  loop do
+    prompt(messages["duration_prompt_months"])
+    duration_months = gets.chomp()
+    break if valid_duration_months?(duration_months, messages)
+  end
+  duration_months
+end
+
+def get_years(messages)
   duration_years = ''
   loop do
-    prompt(messages["duration_prompt"])
+    prompt(messages["duration_prompt_years"])
     duration_years = gets.chomp()
-    break if valid_duration?(duration_years, messages)
+    break if valid_duration_years?(duration_years, messages)
   end
   duration_years
 end
 
-def calculate_monthly_payment(loan, interest_rate, duration_years)
-  monthly_rate = (interest_rate.to_f / MONTHS_IN_YEAR) / 100
-  months = duration_years.to_i * MONTHS_IN_YEAR
-  loan.to_f * (monthly_rate / (1 - ((1 + monthly_rate)**(-months))))
+def get_loan_duration(messages)
+  unit = months_or_years(messages)
+  if unit.start_with?("m")
+    duration = get_months(messages)
+  else
+    duration = get_years(messages)
+    duration = (duration.to_i * MONTHS_IN_YEAR).to_s
+  end
+  duration
 end
 
-# function to format numbers so there are "," in appropriate location
-# if the number is 1000 or greater
+def calculate_monthly_payment(loan, interest_rate, months)
+  monthly_rate = (interest_rate.to_f / MONTHS_IN_YEAR) / 100
+  loan.to_f * (monthly_rate / (1 - ((1 + monthly_rate)**(-months.to_i))))
+end
+
 def format_number(number)
   whole, decimal = number.to_s.split(".")
   num_groups = whole.chars.to_a.reverse.each_slice(3)
@@ -146,9 +166,14 @@ def format_number(number)
   [whole_with_commas, decimal].compact.join(".")
 end
 
-def display_parameters(loan_amount, interest_rate, duration_years, messages)
+def display_parameters(loan_amount, interest_rate, months, messages)
   formatted_loan = format_number(loan_amount)
   formatted_interest = format('%.2f', interest_rate)
+  if months.to_i % MONTHS_IN_YEAR == 0
+    duration_years = (months.to_i / MONTHS_IN_YEAR).to_s
+  else
+    duration_years = (months.to_f / MONTHS_IN_YEAR).round(2).to_s
+  end
   prompt(format(messages["parameters"],
                 currency: messages["currency"],
                 loan: formatted_loan,
@@ -163,9 +188,8 @@ def display_monthly_payment(monthly_payment, messages)
                 payment: formatted_monthly_payment))
 end
 
-def calculate_lifetime_interest(monthly_payment, duration_years, loan_amount)
-  duration_months = duration_years.to_i * MONTHS_IN_YEAR
-  (monthly_payment * duration_months) - loan_amount.to_f
+def calculate_lifetime_interest(monthly_payment, duration_months, loan_amount)
+  (monthly_payment * duration_months.to_i) - loan_amount.to_f
 end
 
 def get_yes_no_input(messages)
@@ -179,13 +203,10 @@ def get_yes_no_input(messages)
 end
 
 def display_lifetime_interest(lifetime_interest, messages)
-  display = get_yes_no_input(messages)
   format_life_interest = format_number(format('%.2f', lifetime_interest))
-  if display.start_with?("y")
-    prompt(format(messages["lifetime_statement"],
-                  currency: messages["currency"],
-                  life_interest: format_life_interest))
-  end
+  prompt(format(messages["lifetime_statement"],
+                currency: messages["currency"],
+                life_interest: format_life_interest))
 end
 
 system("clear")
@@ -200,19 +221,22 @@ prompt(translation["instructions2"])
 loop do
   loan = get_loan_amount(translation)
   apr = get_apr(translation)
-  duration_years = get_loan_duration(translation)
+  duration_months = get_loan_duration(translation)
 
-  monthly_payment = calculate_monthly_payment(loan, apr, duration_years)
+  monthly_payment = calculate_monthly_payment(loan, apr, duration_months)
 
-  display_parameters(loan, apr, duration_years, translation)
+  display_parameters(loan, apr, duration_months, translation)
   display_monthly_payment(monthly_payment, translation)
   sleep(2)
 
   prompt(translation["lifetime_prompt"])
-  lifetime_interest = calculate_lifetime_interest(monthly_payment,
-                                                  duration_years,
-                                                  loan)
-  display_lifetime_interest(lifetime_interest, translation)
+  display = get_yes_no_input(translation)
+  if display.start_with?("y")
+    lifetime_interest = calculate_lifetime_interest(monthly_payment,
+                                                    duration_months,
+                                                    loan)
+    display_lifetime_interest(lifetime_interest, translation)
+  end
 
   prompt(translation["another_loan"])
   continue = get_yes_no_input(translation)

@@ -1,0 +1,36 @@
+---
+"welcome": "Welcome to rock, paper, scissors, lizard, spock!"
+"rules_prompt": "Do you want to see the rules of the game?(Y/N)"
+"rules": |-
+  => The rules of the game are as follows:
+  => Scissors cuts Paper
+  => Paper covers Rock
+  => Rock crushes Lizard
+  => Lizard poisons Spock
+  => Spock smashes Scissors
+  => Scissors decapitates Lizard
+  => Lizard eats Paper
+  => Paper disproves Spock
+  => Spock vaprozes Rock, and as it always has
+  => Rock crushes Scissors
+"prompt_choice": "Please choose one: rock(r), paper(p), scissors(sc), lizard(l), spock(sp)" 
+"invalid_choice": "That's not a valid choice. Please try again."
+"win": "You won!"
+"lose": "You lose!"
+"tie": "Tie Game!"
+"grand_winner_intro": "The first player to 3 wins will be crowned the GRAND WINNER!"
+"summarize_choices": "You chose %{choice}; Computer chose: %{computer_choice}"
+"player_grand_winner": "Congratulations! You are the GRAND WINNER!!"
+"computer_grand_winner": "The computer is the GRAND WINNER! Better luck next time!"
+"play_again": "Do you want to play again? (Y/N)"
+"invalid_input": "Invalid input. Please input Y or N."
+"art": |-
+ ROCK                    PAPER                 SCISSORS                  LIZARD                      SPOCK
+     _______            _______                _______               _.--._       /|           .     .    
+ ---'   ____)      ---'    ____)__         ---'   ____)____        .'()..()`.    / /         . \ \   | |.  
+       (_____)                ______)                ______)      (_`-.__.-'_)  ( (           \ \ \  | | | 
+       (_____)               _______)             __________)     _. -.__.- ._-.-'_.        _  \ \ \ |   | 
+       (____)               _______)            (____)           _. /-____-\ ._ -'         ' '_|         | 
+ ---.__(___)       ---.__________)        ---.__(___)             \\`-.__.-'//              `-_         .`  
+                                                                    |/\||/\|                   `-_____-`  
+"goodbye": "Thanks for playing rock, paper, scissors, lizard, spock!"

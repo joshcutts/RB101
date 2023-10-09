@@ -6,6 +6,18 @@
   2) Spanish (es)
   3) German (de)
 "invalid_language": "Invalid language selection."
+"lang_conversion":
+  '1': en
+  "english": en
+  "en": en
+  '2': es
+  "spanish": es
+  "español": es
+  "es": es
+  '3': de
+  "German": de
+  "deutsch": de
+  "de": de
 en:
   "instructions1": "This calculator will request your loan amount, APR and loan duration,"
   "instructions2": "Then it will calculate your monthly payment for you!"
@@ -15,10 +27,15 @@ en:
   "valid_dollars": "Must enter a valid amount in %{currency_word}."
   "interest_prompt": "What is the Annual Percentage Rate (APR)? For example 5.99%"
   "invalid_interest": "Input a valid percentage between 0.01% and 100%"
-  "duration_prompt": "What is the loan duration in years?"
+  "duration_prompt_months": "What is the loan duration in months?"
+  "duration_prompt_years": "What is the loan duration in years?"
+  "invalid_months": "Invalid months input. Input valid loan duration in months"
   "invalid_years": "Invalid years input. Input valid loan duration in years."
-  "negative_duration": "Loan duration can't be less than or equal to 0. Input valid loan duration in years."
-  "invalid_long_loan": "Loan duration >30 is unusual and invalid. Input valid loan duration in years."
+  "negative_duration_months": "Loan duration can't be less than or equal to 0. Input valid loan duration in months."
+  "negative_duration_years": "Loan duration can't be less than or equal to 0. Input valid loan duration in years."
+  "duration_confirm": "Thats an unusally long loan duration. Are you sure that's what you meant? (Y/N)"
+  "months_or_years": "Do you want to input the loan duration in months or years? (M/Y)"
+  "invalid_months_or_years": "Invalid choice. Please input either months or years. (M/Y)"
   "parameters": |-
     For the following parameters:
     Loan Amount:             %{currency}%{loan}
@@ -39,10 +56,15 @@ es:
   "valid_dollars": "Debe ingresar una cantidad válida en. %{currency_word}."
   "interest_prompt": "¿Qué es la Annual Percentage Rate (APR)?"
   "invalid_interest": "Introduzca un porcentaje válido entre 0.01% y 100%"
-  "duration_prompt": "¿Cuál es la duración del préstamo en años?"
+  "duration_prompt_months": "¿Cuál es la duración del préstamo en meses?"
+  "duration_prompt_years": "¿Cuál es la duración del préstamo en años?"
+  "invalid_months": "Entrada de meses no válida. Ingrese la duración válida del préstamo en meses."
   "invalid_years": "Entrada de años no válida. Ingrese la duración válida del préstamo en años."
-  "negative_duration": "La duración del préstamo no puede ser negativa. Ingrese la duración válida del préstamo en años."
-  "invalid_long_loan": "La duración del préstamo >30 es inusual e inválida. Ingrese la duración válida del préstamo en años."
+  "negative_duration_months": "La duración del préstamo no puede ser menor o igual a 0. Ingrese la duración válida del préstamo en meses."
+  "negative_duration_years": "La duración del préstamo no puede ser negativa. Ingrese la duración válida del préstamo en años."
+  "duration_confirm": "Esa es una duración de préstamo inusualmente larga. ¿Estás seguro de que eso es lo que quisiste decir? (Y/N)"
+  "months_or_years": "¿Quiere ingresar la duración del préstamo en meses o años? (M/Y)"
+  "invalid_months_or_years": "Elección no válida. Por favor ingrese meses o años. (M/Y)"
   "parameters": |-
     Para los siguientes parámetros:
     Monto del préstamo:      %{currency}%{loan}
@@ -63,10 +85,15 @@ de:
   "valid_dollars": "Sie müssen einen gültigen Betrag eingeben %{currency_word}."
   "interest_prompt": "Was ist der Annual Percentage Rate (APR)?"
   "invalid_interest": "Geben Sie einen gültigen Prozentsatz zwischen 0.01% und 100% ein."
-  "duration_prompt": "Wie lang ist die Kreditlaufzeit in Jahren?"
+  "duration_prompt_months": "Wie lang ist die Kreditlaufzeit in Monaten??"
+  "duration_prompt_years": "Wie lang ist die Kreditlaufzeit in Jahren?"
+  "invalid_months": "Ungültige Monatseingabe. Geben Sie die gültige Kreditlaufzeit in Monaten ein."
   "invalid_years": "Ungültige Jahreseingabe. Geben Sie die gültige Kreditlaufzeit in Jahren ein."
-  "negative_duration": "Die Kreditlaufzeit darf nicht negativ sein. Geben Sie die gültige Kreditlaufzeit in Jahren ein."
-  "invalid_long_loan": "Eine Kreditlaufzeit >30 ist ungewöhnlich und ungültig. Geben Sie die gültige Kreditlaufzeit in Jahren ein."
+  "negative_duration_months": "Die Kreditlaufzeit darf nicht kleiner oder gleich 0 sein. Geben Sie eine gültige Kreditlaufzeit in Monaten ein."
+  "negative_duration_years": "Die Kreditlaufzeit darf nicht negativ sein. Geben Sie die gültige Kreditlaufzeit in Jahren ein."
+  "duration_confirm": "Das ist eine ungewöhnlich lange Kreditlaufzeit. Sind Sie sicher, dass Sie das gemeint haben? (Y/N)"
+  "months_or_years": "Möchten Sie die Kreditlaufzeit in Monaten oder Jahren eingeben? (M/Y)"
+  "invalid_months_or_years": "Ungültige Auswahl. Bitte geben Sie entweder Monate oder Jahre ein. (M/Y)"
   "parameters": |-
     Für die folgenden Parameter:
     Darlehensbetrag:         %{currency}%{loan}
