@@ -151,6 +151,7 @@ def display_grandwinner(player_score, messages)
   else
     prompt(messages["computer_grand_winner"])
   end
+  sleep(5)
 end
 
 def get_yes_no_input(messages)
