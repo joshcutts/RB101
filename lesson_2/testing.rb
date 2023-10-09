@@ -1,10 +1,6 @@
 # testing.rb
 
 
-a = [1,2,3,4]
-b = [5,6,7,8]
-c = [9, 10, 11, 12]
+a = {one: 1, two: 2, three: 3}
 
-d = a + b + c
-
-p d
+p a.select {|key, value| value == 1}

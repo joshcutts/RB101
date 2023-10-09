@@ -5,6 +5,7 @@ require "yaml"
 messages = {
   "1" => "=> Welcome to Calculator!",
   "2" => "=> What is your name?",
+  "lang_conversion": {"1" => "en", "english" => "en", "en" => "en", "2" => "es", "spanish" => "es", "español" => "es", "es" => "es", "3" => "de", "German" => "de", "deutsch" => "de", "de" => "de"},
   "3" => "=> Must input a valid name. Try again.",
   "4" => "=> Welcome %{name}",
   "5" => "=> What's the first number?",
@@ -22,4 +23,4 @@ messages = {
   "13" => "Thanks for using the calculator. Good bye!"
 }
 
-File.open("./messages_yaml2.yml", "w") { |file| file.write(messages.to_yaml) }
+File.open("./lesson_2/mortgage_calculator/messages_yaml_test.yml", "w") { |file| file.write(messages.to_yaml) }
